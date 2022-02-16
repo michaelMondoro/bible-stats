@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template, request, url_for
-import matplotlib.pyplot as plt
 from bible import *
 import json
 
