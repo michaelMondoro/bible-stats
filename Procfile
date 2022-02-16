@@ -1,1 +1,1 @@
-web: gunicorn bible_app:app
+web: gunicorn --preload bible_app:app
