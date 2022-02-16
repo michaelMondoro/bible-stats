@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+{% block content %}
+    <!-- write page specific html between here -->  
+    {%if err%}
+        <style>
+            input[type=text] {
+                border-bottom: solid red 1px;
+                animation: transition .1s 5 forwards;
+            }
+            
+        </style>
+    {%endif%}
+    <p><i></i></p>
+    <div class="search">
+        <fieldset style="text-align: left;border-radius: 5px;">
+            <legend style="text-decoration-color: lightskyblue; text-decoration: underline;"> {{query}} </legend>
+            <p style="font-size: 18px;">appears {{values|length}} times in {{title}}</p>
+        </fieldset>
+        <form method="POST">
+            <select name="book" class="book">
+                <option value="" selected>Select option</option>
+                {%for value in values%}
+                    <option value="{{value}}">{{value}}</option> 
+                {%endfor%}
+            </select>
+        </form>
+    </div>
+
+    <div class="content">
+        {%for value in data%}
+        <div id="{{value}}" class="result" style="display: none;">
+            <h3>Chapter {{data[value][0]}}</h3><br><br>
+            <p>{{data[value][2]}}</p>
+        </div>
+        {%endfor%}
+    </div>
+    <script>
+        const book = document.querySelector('.book');
+        var results = document.querySelectorAll('.result');
+
+        book.addEventListener('change', (event) => {
+            for (const result of results.entries()) {
+                rresult = result[1];
+                rresult.style.display = "none";
+            }
+            var elmnt = document.getElementById(`${book.value}`);
+            elmnt.style.display = 'inline-block';
+        });
+    </script>
+        
+{% endblock %}

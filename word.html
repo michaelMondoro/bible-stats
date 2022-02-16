@@ -1,0 +1,113 @@
+
+{% extends "index.html" %}
+{% block content %}
+<!-- write page specific html between here -->  
+
+
+    {%if err%}
+        <style>
+            input[type=text] {
+                border-bottom: solid red 1px;
+                animation: transition .1s 5 forwards;
+            }
+            
+        </style>
+    {%endif%}   
+    
+    <p>Word Search</p><br>
+    <form method="POST">
+        <input type="text" placeholder="Search word" name="word_query">
+        <input type="submit" class="button" name="submit">
+    </form>
+    <br>
+        {%if word_query%}
+            <p><u>{{word_query}}</u> appears {{total}} times in the Bible</p><br>
+
+            <div style="width: 90%; text-align: center; margin: auto;">
+                <canvas id="myChart"></canvas>
+            </div>
+            <br><br>
+
+            {%for title in titles%}
+                <meta class="meta" book="{{title}}" count="{{counts[loop.index0]}}" value='{{verses[loop.index0]}}'>
+            {%endfor%}
+
+        {%endif%}
+        <br><br>
+        <!-- TODO: allow click on graph to view chapter/verse -->
+        <script>
+            // .replace(/[\[\],]/g,'')
+            Chart.defaults.font.size = 16;
+            Chart.defaults.elements.bar.borderWidth = 2;
+
+            var results = document.querySelectorAll('.meta');
+            var books = [];
+            var counts = [];
+            var verses = [];
+            
+            for (const result of results.entries()){
+                rresult = result[1];
+                books = books.concat(rresult.getAttribute('book'));
+                counts = counts.concat(rresult.getAttribute('count'));
+                verses = verses.concat( [rresult.getAttribute('value').match(/[\w ]*/g) ]);
+                for (let i = 0; i<verses.length; i++) {
+                    for (let j = 0; j<verses[i].length; j++){
+                        if (verses[i][j].length < 2) {
+                            verses[i].splice(j,1);
+                        }
+                    }
+                }
+            }
+
+
+            const data = {
+                click: function(e){
+                alert(":LKJ");
+                },
+                labels: books,
+                datasets: [{
+                label: '{{word_query}}',
+                backgroundColor: 'rgba(135, 206, 250,.4)',
+                borderColor: 'rgba(0, 100, 200,.5)',
+                data: counts,
+                }]
+            };
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    onClick: (event, activeElements) => {
+                    if(activeElements.length > 0){
+                        var indx = activeElements[0].index;
+                        var val = books[indx];
+                    
+                        document.location.href = `results?book=${val}&values=${verses[indx]}&search_query={{word_query}}`;
+                    }
+                    
+                },
+                    
+                },
+            };
+
+            const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+
+
+        </script>
+
+
+
+    <!-- <div class="content">
+        {%if word_results%}
+        <p><u>{{word_query}}</u> appears {{word_results[0]}} times in the Bible: Book -> [(Chapter,Verse)]</p><br>
+        {%for result in word_results[1]%}
+            {%if word_results[1][result] %}
+            <p>[{{word_results[1][result]|length}}] {{result}} -> {{word_results[1][result]}}</p>
+            {%endif%}
+        {%endfor%}
+        {%endif%}
+    </div> -->
+    
+{% endblock %}

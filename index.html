@@ -1,0 +1,36 @@
+<head>
+    <title>Bible Search</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <ul><a href="/"><h3>Bible Stats</h3></a></ul>
+    </div>
+    <br><br>
+    <div class="info">
+        <div class="desc">
+            <fieldset>
+                <legend><b>Bible Search</b></legend>
+                <div class="desc_content">
+                    <a href="{{url_for('semantic')}}">Semantic Search</a>
+                    <a href="{{url_for('word')}}">Word Search</a>
+                </div>
+                <br>
+            </fieldset>
+            <br>
+        </div>
+        <div class="stats">
+            <fieldset>
+                <legend><b>Stats</b></legend>
+                
+            </fieldset>
+        </div>
+    </div>
+    <br><br>
+    
+    {% block content %}
+    {% endblock %}
+
+</body>

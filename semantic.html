@@ -1,0 +1,34 @@
+
+
+{% extends "index.html" %}
+{% block content %}
+    <!-- write page specific html between here -->  
+    {%if err%}
+        <style>
+            input[type=text] {
+                border-bottom: solid red 1px;
+                animation: transition .1s 5 forwards;
+            }
+            
+        </style>
+    {%endif%}
+    <p>Semantic Search</p><br>
+    <div class="search">
+        <form method="POST">
+            <select name="book" >
+                <option value="" disabled selected>Select Book</option>
+                {%for book in books%}
+                <option value="{{book}}">{{book}}</option> 
+                {%endfor%}
+            </select><br>
+            <input type="text" placeholder="Search Phrase" name="query">
+            <input type="submit" class="button" name="submit">
+        </form>
+    </div>
+
+    <div class="content">
+        {%for result in results%}
+            <p>Chapter {{result[0]}} Verse {{result[1]}} Score: {{result[2]}}<br> {{result[3]}} . . .</p>
+        {%endfor%}
+    </div>
+{% endblock %}
