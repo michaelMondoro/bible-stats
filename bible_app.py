@@ -9,7 +9,7 @@ model,vocab,num_word = build_word_model()
 def index():
     books = get_books()
     if request.method == "GET":
-        return render_template('index.html', books=books, num_words=len(vocab))
+        return render_template('index.html', books=books, num_words=vocab.shape[1])
         
 
 @app.route('/semantic', methods=["GET","POST"])
