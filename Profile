@@ -1,1 +1,1 @@
-worker: python bible_app.py
+web: gunicorn bible_app:bible_app
