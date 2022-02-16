@@ -28,7 +28,7 @@
 
     <div class="content">
         {%for result in results%}
-            <p>Chapter {{result[0]}} Verse {{result[1]}} Score: {{result[2]}}<br> {{result[3]}} . . .</p>
+            <p><u>Chapter {{result[0]}} Verse {{result[1]}}</u> Similarity Score: {{result[2]}}<br> {{result[3]}} . . .</p>
         {%endfor%}
     </div>
 {% endblock %}
