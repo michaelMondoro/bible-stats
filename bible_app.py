@@ -9,7 +9,7 @@ model,vocab,num_word = build_word_model()
 def index():
     books = get_books()
     if request.method == "GET":
-        return render_template('index.html', books=books, num_words=vocab.shape[1])
+        return render_template('index.html', books=books, num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
         
 
 @app.route('/semantic', methods=["GET","POST"])
@@ -18,7 +18,7 @@ def semantic():
     err = None
     results = []
     if request.method == "GET":
-        return render_template('semantic.html', results=results,books=books,err=None)
+        return render_template('semantic.html', results=results,books=books,err=None,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
 
     book = request.form.get('book')
     query = request.form.get('query')
@@ -28,7 +28,7 @@ def semantic():
     else:
         err = True
     
-    return render_template('semantic.html', results=results,books=books,err=err)
+    return render_template('semantic.html', results=results,books=books,err=err,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
 
 
 @app.route('/word', methods=["GET","POST"])
@@ -43,7 +43,7 @@ def word():
     total = 0
 
     if request.method == "GET":
-        return render_template('word.html', word_query=word_query, word_results=word_results, books=books, err=None)
+        return render_template('word.html', word_query=word_query, word_results=word_results, books=books, err=None,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
 
     if word_query:
             word_results = search_bible(word_query)
@@ -59,7 +59,7 @@ def word():
                 counts.append(len(appearances[book]))
                 verses.append([f"Chapter {x[0]} Verse {x[1]}" for x in appearances[book]])
 
-    return render_template('word.html', word_query=word_query,total=total,titles=labels,counts=counts,verses=verses, books=books, err=err)
+    return render_template('word.html', word_query=word_query,total=total,titles=labels,counts=counts,verses=verses, books=books, err=err,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
 
 
 @app.route('/results',methods=["POST","GET"])
@@ -80,7 +80,7 @@ def book():
     book = bible.get(book_title)
     chapters = []
     verses = []
-    print(f"VALUES: {values}")
+
     for value in values:
         q = value.split(' ')
         chap, verse = q[1],q[3]
@@ -96,7 +96,7 @@ def book():
         
 
     
-    return render_template('book.html',values=values,data=data,query=query,chapters=chapters,title=book_title)
+    return render_template('book.html',values=values,data=data,query=query,chapters=chapters,title=book_title,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
 
 
 

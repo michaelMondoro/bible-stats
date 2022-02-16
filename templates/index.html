@@ -12,7 +12,7 @@
     <div class="info">
         <div class="desc">
             <fieldset>
-                <legend><b>Bible Search</b></legend>
+                <legend><b>Search</b></legend>
                 <div class="desc_content">
                     <a href="{{url_for('semantic')}}">Semantic Search</a>
                     <a href="{{url_for('word')}}">Word Search</a>
@@ -26,6 +26,8 @@
                 <legend><b>Stats</b></legend>
                 <div class="desc_content">
                     <p>73 books</p>
+                    <p>{{num_chaps}} chapters</p>
+                    <p>{{num_verses}} verses</p>
                     <p >{{num_words}} unique words</p>
                 </div>
             </fieldset>

@@ -15,6 +15,7 @@ bible = json.load(f)
 bible.pop('charset')
 books = list(bible.keys())
 
+
 def get_bible():
     return bible
 
@@ -23,6 +24,19 @@ def get_books():
 
 def get_chapters(book):
     return list(bible[book].keys())
+
+def chapter_count():
+    l = 0
+    for book in books:
+        l += len(bible[book].keys())
+    return l
+
+def verse_count():
+    l = 0
+    for book in books:
+        for chapter in bible[book]:
+            l += len(bible[book][chapter].keys())
+    return l
 
 # TODO: Fix search to allow for phrases as well
 def search_book(query, book):
