@@ -1,1 +1,1 @@
-web: gunicorn bible_app:bible_app
+web: gunicorn bible_app:app
