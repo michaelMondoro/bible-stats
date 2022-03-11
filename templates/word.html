@@ -35,7 +35,9 @@
         {%endif%}
         <br><br>
         <!-- TODO: allow click on graph to view chapter/verse -->
-        <script>
+
+        <script src="{{url_for('static', filename='word_chart.js')}}"></script>
+        <!-- <script>
             // .replace(/[\[\],]/g,'')
             Chart.defaults.font.size = 16;
             Chart.defaults.elements.bar.borderWidth = 2;
@@ -95,7 +97,7 @@
             );
 
 
-        </script>
+        </script> -->
 
 
 
