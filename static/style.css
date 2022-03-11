@@ -52,40 +52,19 @@ ul {
 }
 
 .info {
-    display: grid; 
-    grid-template-columns: 6fr 1fr 6fr;
-    grid-auto-rows: 1fr;
-    align-items: center;
-}
-.desc {
-    text-align: center;
-    height: 100%;
-}
-.desc_content {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-auto-rows: 1fr;
-    text-align: center;
-    align-items: center;
-    height: 100%;
-}
 
-legend {
+    align-items: center;
     font-family: 'Dosis', sans-serif;
+    font-size: 1.2em;
 }
-.info fieldset {
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    overflow: hidden;
-    border-width: 3px;
-    border-style: groove none none none;
-    height: 100%;
-    padding: 5px;
-    margin: 0px 20px 0px 20px;
+.info a {
+    text-decoration: none;
+    color: black;
+    margin: 0 auto;
+    padding: 10px;
 }
-
-.stats {
-    height: 100%;
+.info a:hover {
+    text-shadow: 1px 1px 3px rgb(121, 194, 236);
 }
 
 
