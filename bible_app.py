@@ -101,7 +101,9 @@ def book():
     
     return render_template('book.html',values=values,data=data,query=query,chapters=chapters,title=book_title,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
 
-
+@app.errorhandler(404)
+def not_found(e):
+    return "<h1>404 NOT FOUND</h1>"
 
 if __name__=='__main__':
     app.run()
