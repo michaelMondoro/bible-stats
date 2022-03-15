@@ -1,9 +1,12 @@
 from flask import Flask, redirect, render_template, request, url_for
 from bible import *
-import json
+import pickle
 
 app = Flask(__name__)
-model,vocab,num_word = build_word_model()
+# model,vocab,num_word = build_word_model()
+model = pickle.load(open("model.pickle",'rb'))
+vocab = pickle.load(open("vocab.pickle",'rb'))
+
 
 @app.route('/', methods=["GET","POST"])
 def index():
