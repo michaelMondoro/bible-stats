@@ -3,22 +3,27 @@
     <title>Bible Search</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 
 <body>
-    <div class="header">
-        <ul><a href="/"><h3>Bible Stats</h3></a></ul>
+    <div class="container">
+        <header class="header" style="text-align: center!important;">
+            <ul><a href="/"><h3>Bible Stats</h3></a></ul>
+        </header>
+        
+
+        <div class="info">
+            <p style="font-size: 200px; color: lightblue; text-shadow: 1px 5px 10px grey;">&#10013;</p>
+            <a href="{{url_for('word')}}" role="button" class="outline">Word Search</a>
+            <a href="{{url_for('semantic')}}" role="button" class="outline">Semantic Search</a>
+        </div>
+
+        
+        <br><br>
+        
+        {% block content %}
+        {% endblock %}
     </div>
-    
-    <div class="info">
-        <p style="font-size: 200px; color: lightblue; text-shadow: 1px 5px 10px grey;">&#10013;</p>
-        <a href="{{url_for('word')}}">Word Search</a>
-        <a href="{{url_for('semantic')}}">Semantic Search</a>
-    </div>
-    
-    <br><br>
-    
-    {% block content %}
-    {% endblock %}
 
 </body>

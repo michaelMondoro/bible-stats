@@ -25,9 +25,13 @@
         </form>
     </div>
 
-    <div class="content">
+    <div class="container">
         {%for result in results%}
-            <p><u>Chapter {{result[0]}} Verse {{result[1]}}</u> Similarity Score: {{result[2]}}<br> {{result[3]}} . . .</p>
+            <article>
+                <p><u>Chapter {{result[0]}} Verse {{result[1]}}</u><span style="float: right;"> Similarity Score: {{result[2]}}</span></p>
+                <br>
+                <p>{{result[3]}} . . .</p>
+            </article>
         {%endfor%}
     </div>
 {% endblock %}
