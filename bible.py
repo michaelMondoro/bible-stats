@@ -49,7 +49,7 @@ def search_book(query, book):
         
         for verse in chapter_content:
             verse_content = chapter_content.get(verse)
-            if re.findall(f"\s{query}[!@#$%^&*(),\s]",verse_content.lower()): #query in verse_content.lower():
+            if re.findall(f"{query.lower()}",verse_content.lower()): #query in verse_content.lower():
                 count += 1
                 appearances.append((chapter, verse))
     
