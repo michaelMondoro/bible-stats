@@ -19,18 +19,26 @@
         <form method="POST">
             <select name="book" class="book">
                 <option value="" selected>Select option</option>
-                {%for value in values%}
-                    <option value="{{value}}">{{value}}</option> 
+                {%for chapter in data%}
+                    <option value="{{chapter}}">Chapter {{chapter}}</option> 
                 {%endfor%}
             </select>
         </form>
     </div>
 
     <div class="content">
-        {%for value in data%}
-        <div id="{{value}}" class="result" style="display: none;">
-            <h3>Chapter {{data[value][0]}}</h3><br><br>
-            <p>{{data[value][2]}}</p>
+        {%for chapter in data%}
+        <div id="{{chapter}}" class="result" style="display: none;">
+            <h3>Chapter {{chapter}}</h3><br><br>
+            <p>
+            {% for verse in data[chapter] %}
+                {% if verse[2] == 1 %}
+                    <u style="color: red;">[ {{verse[0]}} ]</u> {{verse[1]}}
+                {% else %}
+                    [ {{verse[0]}} ] {{verse[1]}}
+                {% endif %}
+            {%endfor%}
+        </p>
         </div>
         {%endfor%}
     </div>

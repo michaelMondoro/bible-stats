@@ -68,6 +68,7 @@ def word():
 @app.route('/results',methods=["POST","GET"])
 def book():
     data = {}
+    chap_data = {}
     bible = get_bible()
     book_title = request.args.get('book')
     values = request.args.get('values')
@@ -84,13 +85,24 @@ def book():
     chapters = []
     verses = []
 
+    # Build chapter/verse dictionary
     for value in values:
         q = value.split(' ')
         chap, verse = q[1],q[3]
-        data[value] = [chap,verse,""]
+        if chap in chap_data.keys():
+            chap_data[chap].append(verse)
+        else:
+            chap_data[chap] = [verse]
+
+    # Build chapter strings
+    for chap in chap_data:
+        data[chap] = []
         chapter_content = book[chap]
         for v in chapter_content:
-            data[value][2] += f" [{v}] {chapter_content[v]}"
+            if str(v) in chap_data[chap]:
+                data[chap] += [(v, chapter_content[v], 1)]
+            else:
+                data[chap] += [(v, chapter_content[v], 0)]
 
         chapters.append(chap)
         verses.append(verse)
@@ -98,8 +110,9 @@ def book():
         
         
 
-    
-    return render_template('book.html',values=values,data=data,query=query,chapters=chapters,title=book_title,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
+    print(chap_data)
+    print(data)
+    return render_template('book.html',values=values,verses=verses,data=data,query=query,chapters=chapters,title=book_title,num_words=vocab.shape[1],num_chaps="{:,}".format(chapter_count()),num_verses="{:,}".format(verse_count()))
 
 @app.errorhandler(404)
 def not_found(e):
