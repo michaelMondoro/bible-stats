@@ -1,5 +1,5 @@
     
-function chart(word_query){
+function chart(query){
     Chart.defaults.font.size = 16;
     Chart.defaults.elements.bar.borderWidth = 2;
 
@@ -25,11 +25,11 @@ function chart(word_query){
 
     const data = {
         click: function(e){
-        alert(":LKJ");
+            alert("click");
         },
         labels: books,
         datasets: [{
-        label: word_query,
+        label: query,
         backgroundColor: 'rgba(135, 206, 250,.4)',
         borderColor: 'rgba(0, 100, 200,.5)',
         data: counts,
